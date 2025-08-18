@@ -8,7 +8,7 @@ namespace IMS2025_M320
 {
     internal class MyMath
     {
-        static internal int Add(int a, int b)
+        static internal int Addiere(int a, int b)
         {
             return a + b; 
         }
