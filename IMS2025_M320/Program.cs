@@ -1,0 +1,15 @@
+﻿namespace IMS2025_M320
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+
+            int a = 2;
+            int b = 3;
+            int summe = MyMath.Add(a, b);
+            Console.WriteLine($"Summe von {a} und {b} = {summe}");
+        }
+    }
+}
