@@ -1,109 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Shapes
 {
-    internal class Rec
+    public class Rectangle
     {
-        // Attribute privat
-        private int length;
-        private int width;
-        private string color;
-        private (int x, int y) punkt;
-        private readonly int winkelsumme = 360;
-
-        // Properties (öffentliche Schnittstelle)
-        public int Length
+        // Selber implementierte, read-only Eigenschaft
+        private int _width;
+        public int Width   // read-only
         {
-            get { return length; }
-            set { length = value; }
+            get { return _width; }
         }
 
-        public int Width
+        // Selber implementierte, read-write Eigenschaft
+        private int _height;
+        public int Height   // read-write
         {
-            get { return width; }
-            set { width = value; }
+            get { return _height; }
+            set { _height = value; }
         }
 
-        public string Color
+        // Selber implementierte, write-only Eigenschaft
+        private string _color;
+        public string Color   // write-only
         {
-            get { return color; }
-            set { color = value; }
+            set { _color = value; }
         }
 
-        public (int x, int y) Punkt
-        {
-            get { return punkt; }
-            set { punkt = value; }
-        }
+        // Automatisch implementierte, read-only Eigenschaft
+        public int Id { get; } = new Random().Next(1, 1000);
 
-        public int Winkelsumme // nur lesen, da readonly
-        {
-            get { return winkelsumme; }
-        }
+        // Automatisch implementierte, read-write Eigenschaft
+        public string Name { get; set; }
 
-        // Methoden
-        public double CalcFläche()
-        {
-            return length * width;
-        }
+        // Automatisch implementierte, write-only Eigenschaft
+        public string Secret { private get; set; }
 
-        public (int x, int y) VerschiebeRec(int dx, int dy)
-        {
-            punkt = (punkt.x + dx, punkt.y + dy);
-            return punkt;
-        }
-
-        public (int length, int width) SkaliereRec(double f)
-        {
-            int newLength = Math.Max(1, (int)Math.Round(length * f));
-            int newWidth = Math.Max(1, (int)Math.Round(width * f));
-            length = newLength;
-            width = newWidth;
-            return (length, width);
-        }
-
-        public (int length, int width) SkaliereRec(double fx, double fy)
-        {
-            int newLength = Math.Max(1, (int)Math.Round(length * fx));
-            int newWidth = Math.Max(1, (int)Math.Round(width * fy));
-            length = newLength;
-            width = newWidth;
-            return (length, width);
-        }
-
-        public int BerechneWinkel()
-        {
-            return Winkelsumme;
-        }
-
-        // Zeichnet nur den Rand des Rechtecks in der Konsole mit 'X'
-        public void ZeichneRec()
-        {
-            if (length <= 0 || width <= 0) return;
-
-            for (int row = 0; row < width; row++)
-            {
-                if (row == 0 || row == width - 1)
-                {
-                    for (int col = 0; col < length; col++)
-                        Console.Write("X");
-                    Console.WriteLine();
-                }
-                else
-                {
-                    if (length == 1)
-                    {
-                        Console.WriteLine("X");
-                    }
-                    else
-                    {
-                        Console.Write("X");
-                        for (int col = 0; col < length - 2; col++)
-                            Console.Write(" ");
-                        Console.WriteLine("X");
-                    }
-                }
-            }
-        }
+        // Zwei expression-bodied Eigenschaften
+        public int Area => Width * Height;          // nur get
+        public string Info => $"Rectangle {Name}";  // Kurzschreibweise
     }
 }
